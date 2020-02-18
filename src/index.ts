@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ApplicationLogger from "./ApplicationLogger";
-import { ChStructuredLogging } from "./ChStructuredLogging";
+import ChStructuredLogging from "./ChStructuredLogging";
 
 declare global {
     namespace Express {
