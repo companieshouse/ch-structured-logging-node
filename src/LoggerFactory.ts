@@ -17,7 +17,7 @@ class LoggerFactory {
         };
     }
 
-    static create(options: LoggerOptions) {
+    public static create(options: LoggerOptions) {
 
         winston.addColors(logLevels.colours);
 

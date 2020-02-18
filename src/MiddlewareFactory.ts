@@ -6,7 +6,7 @@ import onFinished from "on-finished";
 
 class MiddlewareFactory {
 
-    static create(logger: StructuredLogger) {
+    public static create(logger: StructuredLogger) {
 
         const middleware: RequestHandler = function (request, response, next) {
 

@@ -3,7 +3,7 @@ import winston from "winston";
 
 class HumanFormatFactory {
 
-    static create(namespace: string) {
+    public static create(namespace: string) {
 
         const colorizer = winston.format.colorize();
 
