@@ -32,12 +32,6 @@ describe("LoggerFactory", function () {
             });
         };
 
-        // beforeEach(function () {
-        //     logger = createLoggerWithTestConfig({
-        //         namespace: testNamespace
-        //     });
-        // });
-
         it("has the log level supplied to it", function () {
 
             const traceConfig = createHumanConfig("trace");
