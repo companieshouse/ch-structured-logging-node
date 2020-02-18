@@ -132,7 +132,15 @@
         "no-extra-bind": 2,
         "no-extra-boolean-cast": 2,
         "no-extra-label": 2,
-        "no-extra-parens": ["error", "all", { "enforceForArrowConditionals": false, "enforceForNewInMemberExpressions": false, "nestedBinaryExpressions": false }],
+        "no-extra-parens": [
+            "error",
+            "all",
+            {
+                "enforceForArrowConditionals": false,
+                "enforceForNewInMemberExpressions": false,
+                "nestedBinaryExpressions": false
+            }
+        ],
         "no-extra-semi": 2,
         "no-fallthrough": 2,
         "no-floating-decimal": 2,
@@ -153,7 +161,6 @@
         "no-lone-blocks": 2,
         "no-lonely-if": 2,
         "no-loop-func": 2,
-        // "no-magic-numbers": ["error", { "ignore": [0, 1], "ignoreArrayIndexes": true }],
         "no-magic-numbers": "off",
         "@typescript-eslint/no-magic-numbers": ["error", {
             "ignore": [0, 1],
