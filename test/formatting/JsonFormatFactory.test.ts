@@ -2,7 +2,6 @@ import JsonFormatFactory from "../../lib/formatting/JsonFormatFactory";
 import chai from "chai";
 const expect = chai.expect;
 
-
 describe("#JsonFormatFactory", function () {
 
     const testNamespace = "my-namespace";

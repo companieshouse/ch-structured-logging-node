@@ -3,7 +3,6 @@ import chai from "chai";
 import winston from "winston";
 const expect = chai.expect;
 
-
 describe("#HumanFormatFactory", function () {
 
     const testNamespace = "my-namespace";
