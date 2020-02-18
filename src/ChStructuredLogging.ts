@@ -4,7 +4,7 @@ import MiddlewareFactory from "./MiddlewareFactory";
 import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
 
-export class ChStructuredLogging {
+class ChStructuredLogging {
 
     logger: StructuredLogger;
 
@@ -16,3 +16,5 @@ export class ChStructuredLogging {
         this.middleware = MiddlewareFactory.create(this.logger);
     }
 }
+
+export = ChStructuredLogging;
