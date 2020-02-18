@@ -1,4 +1,4 @@
-import { Logger, LeveledLogMethod } from "winston";
+import { LeveledLogMethod, Logger } from "winston";
 
 interface StructuredLogger extends Logger {
 

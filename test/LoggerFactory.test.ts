@@ -1,5 +1,3 @@
-"use strict";
-
 import chai from "chai";
 import proxyquire from "proxyquire";
 const expect = chai.expect;
@@ -64,11 +62,11 @@ describe("LoggerFactory", function () {
             expect(requestLogger.level).to.equal("request");
         });
 
-        it("has selects the human formatter if humanReadable is true", function () {
+        it("selects the human formatter if humanReadable is true", function () {
 
             const humanLogger = createLoggerWithTestConfig(createHumanConfig("trace"));
 
-            expect(humanLogger._readableState.pipes.format).to.equal("human formatter");
+            expect(humanLogger._readableState.pipes.format.template()).to.equal("human formatter");
         });
     });
 });

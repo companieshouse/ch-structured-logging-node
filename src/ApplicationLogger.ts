@@ -4,6 +4,7 @@ import StructuredLogger from "./StructuredLogger";
 class ApplicationLogger {
 
     private logger: StructuredLogger;
+
     private metaData: LogMetaData;
 
     constructor(logger: StructuredLogger, metaData: LogMetaData) {

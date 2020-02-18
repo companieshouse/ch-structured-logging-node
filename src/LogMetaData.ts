@@ -1,5 +1,4 @@
 interface LogMetaData {
-
     [index: string]: any;
     path: string;
     method: string;

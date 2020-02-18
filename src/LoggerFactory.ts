@@ -1,12 +1,10 @@
-"use strict";
-
-import config from "./config";
-import winston from "winston";
-import logLevels from "./levelConfig";
-import LoggerOptions from "./LoggerOptions";
-import StructuredLogger from "./StructuredLogger";
 import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
+import LoggerOptions from "./LoggerOptions";
+import StructuredLogger from "./StructuredLogger";
+import config from "./config";
+import logLevels from "./levelConfig";
+import winston from "winston";
 
 class LoggerFactory {
 
@@ -17,7 +15,7 @@ class LoggerFactory {
                 HumanFormatFactory.create(namespace) :
                 JsonFormatFactory.create(namespace)
         };
-    };
+    }
 
     static create(options: LoggerOptions) {
 

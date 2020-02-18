@@ -1,5 +1,3 @@
-"use strict";
-
 import winston from "winston";
 
 class JsonFormatFactory {
@@ -20,7 +18,7 @@ class JsonFormatFactory {
                     duration: info.duration
                 }
             };
-    
+
             return JSON.stringify(message);
         });
     }

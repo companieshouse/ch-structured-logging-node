@@ -4,9 +4,9 @@
   "description": "A logging solution for CHS structured logging in node apps.",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register --recursive --reporter nyan test/LoggerFactory.test.ts",
-    "lint": "eslint lib test",
-    "test:watch": "mocha --recursive --reporter nyan --watch",
+    "lint": "eslint test",
+    "test": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts",
+    "test:watch": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts --watch",
     "build": "tsc",
     "prepare": "npm run build"
   },

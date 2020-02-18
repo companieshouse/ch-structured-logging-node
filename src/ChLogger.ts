@@ -1,12 +1,13 @@
-import { RequestHandler } from 'express';
-import MiddlewareFactory from "./MiddlewareFactory";
 import LoggerFactory from "./LoggerFactory";
 import LoggerOptions from "./LoggerOptions";
+import MiddlewareFactory from "./MiddlewareFactory";
+import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
 
 export class ChLogger {
 
     logger: StructuredLogger;
+
     middleware: RequestHandler;
 
     constructor(options: LoggerOptions) {

@@ -1,5 +1,3 @@
-"use strict";
-
 import { AbstractConfigSetColors, AbstractConfigSetLevels } from "winston/lib/winston/config";
 
 const levelConfig: { levels: AbstractConfigSetLevels, colours: AbstractConfigSetColors } = {

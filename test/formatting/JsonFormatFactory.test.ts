@@ -1,23 +1,20 @@
-"use strict";
-
-require("mocha");
-const chai = require("chai");
+import JsonFormatFactory from "../../lib/formatting/JsonFormatFactory";
+import chai from "chai";
 const expect = chai.expect;
 
-const jsonFormatter = require("../../lib/formatters/jsonFormatter");
 
-describe("#jsonFormatter", function () {
+describe("#JsonFormatFactory", function () {
 
     const testNamespace = "my-namespace";
 
-    let formatter;
+    let formatter: any;
 
-    const getLog = function (testInfo) {
+    const getLog = function (testInfo: any) {
         return JSON.parse(formatter.template(testInfo));
     };
 
     beforeEach(function () {
-        formatter = jsonFormatter(testNamespace);
+        formatter = JsonFormatFactory.create(testNamespace);
     });
 
     it("shows the message passed in", function () {

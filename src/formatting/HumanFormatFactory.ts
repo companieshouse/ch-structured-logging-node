@@ -1,7 +1,5 @@
-"use strict";
-
-import winston from "winston";
 import LogMetaData from "../LogMetaData";
+import winston from "winston";
 
 class HumanFormatFactory {
 

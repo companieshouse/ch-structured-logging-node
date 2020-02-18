@@ -10,6 +10,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strictNullChecks": true,
+        "noUnusedLocals": true,
         "sourceMap": true,
         "typeRoots": [
             "src/custom.d.ts",

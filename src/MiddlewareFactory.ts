@@ -1,10 +1,8 @@
-"use strict";
-
-import onFinished from "on-finished";
-import { RequestHandler } from "express";
-import LogMetaData from "./LogMetaData";
-import StructuredLogger from "./StructuredLogger";
 import ApplicationLogger from "./ApplicationLogger";
+import LogMetaData from "./LogMetaData";
+import { RequestHandler } from "express";
+import StructuredLogger from "./StructuredLogger";
+import onFinished from "on-finished";
 
 class MiddlewareFactory {
 

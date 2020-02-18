@@ -1,13 +1,10 @@
-"use strict";
-
-require("mocha");
-const chai = require("chai");
+import HumanFormatFactory from "../../src/formatting/HumanFormatFactory";
+import chai from "chai";
+import winston from "winston";
 const expect = chai.expect;
 
-const winston = require("winston");
-const humanFormatter = require("../../src/formatters/humanFormatter");
 
-describe("#humanFormatter", function () {
+describe("#HumanFormatFactory", function () {
 
     const testNamespace = "my-namespace";
 
@@ -15,10 +12,10 @@ describe("#humanFormatter", function () {
         request: "cyan"
     });
 
-    let formatter;
+    let formatter: any;
 
     beforeEach(function () {
-        formatter = humanFormatter(testNamespace);
+        formatter = HumanFormatFactory.create(testNamespace);
     });
 
     it("shows the message passed in", function () {
