@@ -19,7 +19,7 @@ class MiddlewareFactory {
 
             const applicationLogger = new ApplicationLogger(logger, metaData);
 
-            applicationLogger.request("Start request");
+            logger.request("Start requesting", metaData);
 
             request.logger = applicationLogger;
 

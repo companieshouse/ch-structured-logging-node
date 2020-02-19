@@ -29,10 +29,6 @@ class ApplicationLogger {
         this.logger.request(message, this.metaData);
     }
 
-    endRequest(message: string, finalMetaData: LogMetaData) {
-        this.logger.request(message, finalMetaData);
-    }
-
     public error(message: string) {
         this.logger.error(message, this.metaData);
     }
