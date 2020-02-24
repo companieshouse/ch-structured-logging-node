@@ -6,11 +6,11 @@ import StructuredLogger from "./StructuredLogger";
 
 class ChStructuredLogging {
 
-    logger: StructuredLogger;
+    public readonly logger: StructuredLogger;
 
-    middleware: RequestHandler;
+    public readonly middleware: RequestHandler;
 
-    constructor(options: LoggerOptions) {
+    public constructor(options: LoggerOptions) {
 
         this.logger = LoggerFactory.create(options);
         this.middleware = MiddlewareFactory.create(this.logger);

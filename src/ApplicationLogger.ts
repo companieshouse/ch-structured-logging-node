@@ -3,9 +3,9 @@ import StructuredLogger from "./StructuredLogger";
 
 class ApplicationLogger {
 
-    private logger: StructuredLogger;
+    private readonly logger: StructuredLogger;
 
-    private metaData: LogMetaData;
+    private readonly metaData: LogMetaData;
 
     constructor(logger: StructuredLogger, metaData: LogMetaData) {
 
@@ -13,27 +13,23 @@ class ApplicationLogger {
         this.metaData = metaData;
     }
 
-    trace(message: string) {
+    public trace(message: string) {
         this.logger.trace(message, this.metaData);
     }
 
-    debug(message: string) {
+    public debug(message: string) {
         this.logger.debug(message, this.metaData);
     }
 
-    info(message: string) {
+    public info(message: string) {
         this.logger.info(message, this.metaData);
     }
 
-    request(message: string) {
+    public request(message: string) {
         this.logger.request(message, this.metaData);
     }
 
-    endRequest(message: string, finalMetaData: LogMetaData) {
-        this.logger.request(message, finalMetaData);
-    }
-
-    error(message: string) {
+    public error(message: string) {
         this.logger.error(message, this.metaData);
     }
 }

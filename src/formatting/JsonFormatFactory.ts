@@ -2,7 +2,7 @@ import winston from "winston";
 
 class JsonFormatFactory {
 
-    static create(namespace: string) {
+    public static create(namespace: string) {
 
         return winston.format.printf(function (info) {
 

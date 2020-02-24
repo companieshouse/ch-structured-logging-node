@@ -8,7 +8,8 @@
     "test": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts",
     "test:watch": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts --watch",
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "install": "npm run build"
   },
   "repository": {
     "type": "git",
