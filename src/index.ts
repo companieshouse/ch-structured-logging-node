@@ -1,13 +1,24 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ApplicationLogger from "./ApplicationLogger";
-import ChStructuredLogging from "./ChStructuredLogging";
+import ApplicationLogger from "./ApplicationLogger"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import LoggerFactory from "./LoggerFactory";
+import MiddlewareFactory from "./MiddlewareFactory";
 
-declare global {
-    namespace Express {
-        interface Request {
-            logger: ApplicationLogger;
-        }
-    }
-}
+const createLoggerMiddleware = function (namespace: string) {
 
-export = ChStructuredLogging;
+    return MiddlewareFactory.create(
+        LoggerFactory.create({
+            namespace: namespace
+        })
+    );
+};
+
+const createLogger = function (namespace: string) {
+
+    return new ApplicationLogger(LoggerFactory.create({
+        namespace: namespace
+    }));
+};
+
+export {
+    createLoggerMiddleware,
+    createLogger
+};
