@@ -1,7 +1,7 @@
-import ApplicationLogger from "./ApplicationLogger";
 import LogMetaData from "./LogMetaData";
 import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
+import getRequestMetaData from "./getRequestMetaData";
 import onFinished from "on-finished";
 
 class MiddlewareFactory {
@@ -12,22 +12,15 @@ class MiddlewareFactory {
 
             const startTime = Date.now();
 
-            const metaData: LogMetaData = {
-                path: request.path,
-                method: request.method
-            };
-
-            const applicationLogger = new ApplicationLogger(logger, metaData);
+            const metaData = getRequestMetaData(request);
 
             logger.request("Start requesting", metaData);
-
-            request.logger = applicationLogger;
 
             onFinished(response, function () {
 
                 const duration = Date.now() - startTime;
 
-                const finalMetaData = Object.assign(metaData, {
+                const finalMetaData: LogMetaData = Object.assign(metaData, {
                     status: response.statusCode,
                     duration: duration
                 });

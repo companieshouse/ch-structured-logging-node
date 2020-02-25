@@ -1,1 +1,0 @@
-{"version":3,"file":"ChStructuredLogging.js","sourceRoot":"","sources":["../src/ChStructuredLogging.ts"],"names":[],"mappings":";;;;AAAA,oEAA4C;AAE5C,4EAAoD;AAIpD,MAAM,mBAAmB;IAMrB,YAAmB,OAAsB;QAErC,IAAI,CAAC,MAAM,GAAG,uBAAa,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC;QAC5C,IAAI,CAAC,UAAU,GAAG,2BAAiB,CAAC,MAAM,CAAC,IAAI,CAAC,MAAM,CAAC,CAAC;IAC5D,CAAC;CACJ;AAED,iBAAS,mBAAmB,CAAC"}
