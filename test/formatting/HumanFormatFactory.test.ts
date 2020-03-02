@@ -26,8 +26,9 @@ describe("#HumanFormatFactory", function () {
 
         const logString = formatter.template(testInfo);
 
-        expect(logString).to.contain(testInfo.level);
-        expect(logString).to.contain(testInfo.message);
+        expect(logString)
+            .to.contain(testInfo.level)
+            .to.contain(testInfo.message);
     });
 
     it("has the correct number of lines", function () {
@@ -43,9 +44,11 @@ describe("#HumanFormatFactory", function () {
         const expectedNumberOfLines = 5;
         const actualNumberOfLines = logString.split("\n").length;
 
-        expect(logString).to.contain(testInfo.level);
-        expect(logString).to.contain(testInfo.message);
-        expect(logString).to.contain(testInfo.method);
+        expect(logString)
+            .to.contain(testInfo.level)
+            .to.contain(testInfo.message)
+            .to.contain(testInfo.method);
+
         expect(actualNumberOfLines).to.equal(expectedNumberOfLines);
     });
 
@@ -78,13 +81,15 @@ describe("#HumanFormatFactory", function () {
         const expectedNumberOfLines = 8;
         const actualNumberOfLines = logString.split("\n").length;
 
-        expect(logString).to.contain(testInfo.level);
-        expect(logString).to.contain(testInfo.message);
-        expect(logString).to.contain(`event: ${testInfo.level}`);
-        expect(logString).to.contain(`path: ${testInfo.path}`);
-        expect(logString).to.contain(`method: ${testInfo.method}`);
-        expect(logString).to.contain(`status: ${testInfo.status}`);
-        expect(logString).to.contain(`duration: ${testInfo.duration}`);
+        expect(logString)
+            .to.contain(testInfo.level)
+            .to.contain(testInfo.message)
+            .to.contain(`event: ${testInfo.level}`)
+            .to.contain(`path: ${testInfo.path}`)
+            .to.contain(`method: ${testInfo.method}`)
+            .to.contain(`status: ${testInfo.status}`)
+            .to.contain(`duration: ${testInfo.duration}`);
+
         expect(actualNumberOfLines).to.equal(expectedNumberOfLines);
     });
 
@@ -102,8 +107,10 @@ describe("#HumanFormatFactory", function () {
         const actualNumberOfLines = logString.split("\n").length;
 
         expect(actualNumberOfLines).to.equal(expectedNumberOfLines);
-        expect(logString).to.not.contain("method");
-        expect(logString).to.not.contain("status");
+
+        expect(logString)
+            .to.not.contain("method")
+            .to.not.contain("status");
     });
 
     it("doesn't print keys which are not in the spec", function () {
@@ -131,10 +138,12 @@ describe("#HumanFormatFactory", function () {
         const expectedNumberOfLines = 4;
         const actualNumberOfLines = logString.split("\n").length;
 
-        expect(logString).to.contain(testInfo.level);
-        expect(logString).to.contain(testInfo.message);
-        expect(logString).to.contain(`namespace: ${testNamespace}`);
-        expect(logString).to.contain("created: ");
+        expect(logString)
+            .to.contain(testInfo.level)
+            .to.contain(testInfo.message)
+            .to.contain(`namespace: ${testNamespace}`)
+            .to.contain("created: ");
+
         expect(actualNumberOfLines).to.equal(expectedNumberOfLines);
     });
 });
