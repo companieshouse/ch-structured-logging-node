@@ -1,4 +1,5 @@
 import winston from "winston";
+import moment = require('moment');
 
 class JsonFormatFactory {
 
@@ -7,7 +8,7 @@ class JsonFormatFactory {
         return winston.format.printf(function (info) {
 
             const message = {
-                created: (new Date()).toISOString(),
+                created: moment().format(),
                 event: info.level,
                 namespace: namespace,
                 data: {
