@@ -1,6 +1,6 @@
 import LogMetaData from "../LogMetaData";
 import winston from "winston";
-import moment = require('moment');
+import moment from 'moment';
 
 class HumanFormatFactory {
 

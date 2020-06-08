@@ -3,7 +3,7 @@ import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
 import getRequestMetaData from "./getRequestMetaData";
 import onFinished from "on-finished";
-import moment = require('moment');
+import moment from 'moment';
 
 class MiddlewareFactory {
 
