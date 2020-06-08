@@ -3,7 +3,6 @@ import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
 import getRequestMetaData from "./getRequestMetaData";
 import onFinished from "on-finished";
-import moment from 'moment';
 
 class MiddlewareFactory {
 
@@ -11,7 +10,7 @@ class MiddlewareFactory {
 
         const middleware: RequestHandler = function (request, response, next) {
 
-            const startTime = moment().format();
+            const startTime = Date.now();
 
             const metaData = getRequestMetaData(request);
 
@@ -19,7 +18,7 @@ class MiddlewareFactory {
 
             onFinished(response, function () {
 
-                const duration = moment().format(); - startTime;
+                const duration = Date.now() - startTime;
 
                 const finalMetaData: LogMetaData = Object.assign(metaData, {
                     status: response.statusCode,

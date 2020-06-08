@@ -1,6 +1,6 @@
 import LogMetaData from "../LogMetaData";
+import moment from "moment";
 import winston from "winston";
-import moment from 'moment';
 
 class HumanFormatFactory {
 
@@ -11,7 +11,7 @@ class HumanFormatFactory {
         return winston.format.printf(function (info) {
 
             const messageInfo: LogMetaData = {
-                created: moment().format(),
+                created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 namespace: namespace,
                 event: info.level,
                 path: info.path,

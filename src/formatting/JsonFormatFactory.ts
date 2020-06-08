@@ -1,5 +1,5 @@
+import moment from "moment";
 import winston from "winston";
-import moment from 'moment';
 
 class JsonFormatFactory {
 
@@ -8,7 +8,7 @@ class JsonFormatFactory {
         return winston.format.printf(function (info) {
 
             const message = {
-                created: moment().format(),
+                created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 event: info.level,
                 namespace: namespace,
                 data: {
