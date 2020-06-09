@@ -1,6 +1,8 @@
 import HumanFormatFactory from "../../src/formatting/HumanFormatFactory";
 import chai from "chai";
 import winston from "winston";
+import MockDate from 'mockdate';
+import moment from "moment";
 const expect = chai.expect;
 
 describe("#HumanFormatFactory", function () {
@@ -19,6 +21,8 @@ describe("#HumanFormatFactory", function () {
 
     it("shows the message passed in", function () {
 
+        MockDate.set(moment('2020-06-09T06:01:43.758+01:00').toDate());
+
         const testInfo = {
             level: "info",
             message: "This is a great test"
@@ -26,8 +30,10 @@ describe("#HumanFormatFactory", function () {
 
         const logString = formatter.template(testInfo);
 
+        expect(logString).to.contain("2020-06-09T06:01:43.758+01:00");
         expect(logString).to.contain(testInfo.level);
         expect(logString).to.contain(testInfo.message);
+        MockDate.reset();
     });
 
     it("has the correct number of lines", function () {
