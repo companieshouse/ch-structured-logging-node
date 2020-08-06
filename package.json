@@ -16,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/he": "^1.1.1",
+    "he": "^1.2.0",
     "moment": "~2.26.0",
     "on-finished": "~2.3.0",
     "winston": "~3.2.1"
