@@ -1,6 +1,6 @@
 {
-  "name": "ch-structured-logging",
-  "version": "0.0.1",
+  "name": "ch-structured-logging-node",
+  "version": "1.0.0",
   "description": "A logging solution for CHS structured logging in node apps.",
   "main": "./lib/index.js",
   "scripts": {
