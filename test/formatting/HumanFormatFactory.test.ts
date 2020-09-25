@@ -1,8 +1,8 @@
 import HumanFormatFactory from "../../src/formatting/HumanFormatFactory";
+import MockDate from "mockdate";
 import chai from "chai";
-import winston from "winston";
-import MockDate from 'mockdate';
 import moment from "moment";
+import winston from "winston";
 const expect = chai.expect;
 
 describe("#HumanFormatFactory", function () {
@@ -21,7 +21,7 @@ describe("#HumanFormatFactory", function () {
 
     it("shows the message passed in", function () {
 
-        MockDate.set(moment('2020-06-09T06:01:43.758+01:00').toDate());
+        MockDate.set(moment("2020-06-09T06:01:43.758+01:00").toDate());
 
         const testInfo = {
             level: "info",
