@@ -1,20 +1,23 @@
 {
-  "name": "ch-structured-logging-node",
+  "name": "@companieshouse/structured-logging-node",
   "version": "1.0.0",
   "description": "A logging solution for CHS structured logging in node apps.",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "lint": "eslint test",
     "test": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts",
     "test:watch": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "tsc",
+    "postpublish": "rm -rf lib"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/companieshouse/ch-structured-logging-node.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "moment": "~2.29.0",
     "on-finished": "~2.3.0",
