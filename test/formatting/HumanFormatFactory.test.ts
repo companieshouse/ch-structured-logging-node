@@ -20,8 +20,9 @@ describe("#HumanFormatFactory", function () {
     });
 
     it("shows the message passed in", function () {
+        const date = moment("2020-06-09T06:01:43.758+01:00");
 
-        MockDate.set(moment("2020-06-09T06:01:43.758+01:00").toDate());
+        MockDate.set(date.toDate());
 
         const testInfo = {
             level: "info",
@@ -30,7 +31,7 @@ describe("#HumanFormatFactory", function () {
 
         const logString = formatter.template(testInfo);
 
-        expect(logString).to.contain("2020-06-09T06:01:43.758+01:00");
+        expect(logString).to.contain(date.format("YYYY-MM-DDTHH:mm:ss.SSSZ"));
         expect(logString).to.contain(testInfo.level);
         expect(logString).to.contain(testInfo.message);
         MockDate.reset();
