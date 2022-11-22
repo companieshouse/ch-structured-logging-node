@@ -14,6 +14,7 @@ class HumanFormatFactory {
                 created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 namespace: namespace,
                 event: info.level,
+                context: info.context,
                 path: info.path,
                 method: info.method,
                 status: info.status,
