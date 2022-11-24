@@ -7,6 +7,7 @@ interface LogMetaData {
     event?: string;
     status?: number;
     duration?: number;
+    context?: string;
 }
 
 export = LogMetaData;

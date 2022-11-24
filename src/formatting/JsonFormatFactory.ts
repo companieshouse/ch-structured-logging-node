@@ -13,6 +13,7 @@ class JsonFormatFactory {
                 namespace: namespace,
                 data: {
                     message: info.message,
+                    context: info.context,
                     path: info.path,
                     method: info.method,
                     status: info.status,
