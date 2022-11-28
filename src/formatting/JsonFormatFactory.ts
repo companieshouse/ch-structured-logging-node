@@ -11,9 +11,9 @@ class JsonFormatFactory {
                 created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 event: info.level,
                 namespace: namespace,
+                context: info.context,
                 data: {
                     message: info.message,
-                    context: info.context,
                     path: info.path,
                     method: info.method,
                     status: info.status,
