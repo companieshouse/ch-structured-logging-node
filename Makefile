@@ -13,6 +13,10 @@ build:	package-install lint
 .PHONY: test
 test: test-unit
 
+.PHONY: security-check
+security-check:
+	npm audit
+
 .PHONY: test-unit
 test-unit:
 	npm run test
