@@ -13,6 +13,10 @@ build:	package-install lint
 .PHONY: test
 test: test-unit
 
+.PHONY: sonar
+sonar:
+	npm run sonarqube
+
 .PHONY: security-check
 security-check:
 	npm audit
