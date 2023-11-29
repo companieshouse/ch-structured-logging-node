@@ -6,7 +6,7 @@ const getRequestMetaData = function (request: Request): LogMetaData {
     return {
         path: request.path,
         method: request.method,
-        context: request.headers['context'] === undefined ? undefined : request.headers['context'].toString()
+        context: request.headers.context === undefined ? undefined : request.headers.context.toString()
     };
 };
 
