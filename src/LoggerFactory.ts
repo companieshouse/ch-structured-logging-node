@@ -8,7 +8,7 @@ import winston from "winston";
 import * as api from "@opentelemetry/api-logs";
 // It might be one of http, proto, grpc depending on preferred transport
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
-
+const { envDetector, processDetector, hostDetector, detectResourcesSync } = require('@opentelemetry/resources');
 import {
   LoggerProvider,
   SimpleLogRecordProcessor
@@ -38,7 +38,13 @@ class LoggerFactory {
         //     });
 
         
-        const loggerProvider = new LoggerProvider();
+        const loggerProvider = new LoggerProvider({
+          // without resource we don't have proper service.name, service.version correlated with logs
+            resource: detectResourcesSync({
+          // this have to be manually adjusted to match SDK OTEL_NODE_RESOURCE_DETECTORS
+              detectors: [envDetector, processDetector, hostDetector],
+            }),
+          });
 
         loggerProvider.addLogRecordProcessor(
           // new BatchLogRecordProcessor(logExporter)
