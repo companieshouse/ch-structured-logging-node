@@ -11,7 +11,7 @@ import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 const { envDetector, processDetector, hostDetector, detectResourcesSync } = require('@opentelemetry/resources');
 import {
   LoggerProvider,
-  SimpleLogRecordProcessor
+  BatchLogRecordProcessor
 } from "@opentelemetry/sdk-logs";
 import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 
@@ -31,25 +31,15 @@ class LoggerFactory {
         winston.addColors(logLevels.colours);
 
 
-        // const logExporter = new OTLPLogExporter();
-        // const resource: IResource = detectResourcesSync({
-        //   // this have to be manually adjusted to match SDK OTEL_NODE_RESOURCE_DETECTORS
-        //       detectors: [envDetectorSync, processDetectorSync, hostDetectorSync],
-        //     });
-
-        
         const loggerProvider = new LoggerProvider({
           // without resource we don't have proper service.name, service.version correlated with logs
             resource: detectResourcesSync({
-          // this have to be manually adjusted to match SDK OTEL_NODE_RESOURCE_DETECTORS
               detectors: [envDetector, processDetector, hostDetector],
             }),
           });
 
         loggerProvider.addLogRecordProcessor(
-          // new BatchLogRecordProcessor(logExporter)
-          new SimpleLogRecordProcessor(new OTLPLogExporter())
-          // new SimpleLogRecordProcessor(new ConsoleLogRecordExporter())
+          new BatchLogRecordProcessor(new OTLPLogExporter())
         );
         api.logs.setGlobalLoggerProvider(loggerProvider);
 
