@@ -14,7 +14,7 @@ build:	package-install lint
 test: test-unit
 
 .PHONY: sonar
-sonar:
+sonar: test
 	npm run sonarqube
 
 .PHONY: security-check
