@@ -8,7 +8,7 @@
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
     "test": "mocha -r ts-node/register --recursive test --extension ts",
-    "test:watch": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts --watch",
+    "test:watch": "mocha -r ts-node/register --recursive test --extension ts --watch",
     "test:coverage": "nyc npm test",
     "build": "tsc",
     "sonarqube": "sonar-scanner",
