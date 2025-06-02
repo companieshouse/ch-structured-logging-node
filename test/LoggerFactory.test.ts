@@ -76,6 +76,7 @@ describe("LoggerFactory", function () {
 
         it("has no open telemetry transport attached if otel flag is not passed", function () {
             const humanLogger = createLoggerWithTestConfig(createHumanConfig("trace", false));
+
             expect(humanLogger._readableState.pipes.name).to.equal("console");
         });
 
