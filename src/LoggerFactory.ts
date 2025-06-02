@@ -1,5 +1,6 @@
 import * as api from "@opentelemetry/api-logs";
 import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
+import { detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
 import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
@@ -9,7 +10,6 @@ import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
-const { envDetector, processDetector, hostDetector, detectResourcesSync } = require("@opentelemetry/resources");
 
 class LoggerFactory {
 
@@ -29,7 +29,7 @@ class LoggerFactory {
         if (config.otelLogEnabled) {
             const loggerProvider = new LoggerProvider({
             // Service.name, service.version correlated with logs
-                resource: detectResourcesSync({
+                resource: detectResources({
                     detectors: [envDetector, processDetector, hostDetector]
                 })
             });

@@ -1,3 +1,5 @@
+import { Console } from "winston/lib/winston/transports";
+import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import chai from "chai";
 import proxyquire from "proxyquire";
 const expect = chai.expect;
@@ -8,10 +10,11 @@ describe("LoggerFactory", function () {
 
         const testNamespace = "my-namespace";
 
-        const createHumanConfig = function (level: string) {
+        const createHumanConfig = function (level: string, otelLogEnabled?: boolean) {
             return {
                 level: level,
-                humanReadable: true
+                humanReadable: true,
+                otelLogEnabled
             };
         };
 
@@ -62,5 +65,19 @@ describe("LoggerFactory", function () {
 
             expect(humanLogger._readableState.pipes.format.template()).to.equal("human formatter");
         });
+
+        it("has open telemetry transport attached if otel flag is passed", function () {
+            const humanLogger = createLoggerWithTestConfig(createHumanConfig("trace", true));
+
+            expect(humanLogger._readableState.pipes).to.have.lengthOf(2);
+            expect(humanLogger._readableState.pipes[0]).to.be.an.instanceof(Console);
+            expect(humanLogger._readableState.pipes[1]).to.be.an.instanceof(OpenTelemetryTransportV3);
+        });
+
+        it("has no open telemetry transport attached if otel flag is not passed", function () {
+            const humanLogger = createLoggerWithTestConfig(createHumanConfig("trace", false));
+            expect(humanLogger._readableState.pipes.name).to.equal("console");
+        });
+
     });
 });
