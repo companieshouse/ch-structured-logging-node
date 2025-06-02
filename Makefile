@@ -11,7 +11,8 @@ build:	package-install lint
 	npm run build
 
 .PHONY: test
-test: test-unit
+test: 
+	npm run test:coverage
 
 .PHONY: sonar
 sonar: test
