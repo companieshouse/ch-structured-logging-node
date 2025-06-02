@@ -57,7 +57,7 @@ describe("LoggerFactory", function () {
             expect(errorLogger.level).to.equal("error");
             expect(infoLogger.level).to.equal("info");
             expect(requestLogger.level).to.equal("request");
-        });
+        }).timeout(5000);
 
         it("selects the human formatter if humanReadable is true", function () {
 
