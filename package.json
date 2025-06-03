@@ -9,7 +9,7 @@
     "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
     "test": "mocha -r ts-node/register --recursive test --extension ts",
     "test:watch": "mocha -r ts-node/register --recursive --reporter nyan test --extension ts --watch",
-    "test:coverage": "nyc --reporter=lcov npm test",
+    "test:coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
     "build": "tsc",
     "sonarqube": "sonar-scanner",
     "prepublishOnly": "[ ! -d node_modules ] && npm install; tsc",
