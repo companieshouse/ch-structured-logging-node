@@ -1,6 +1,11 @@
+import * as api from "@opentelemetry/api-logs";
+import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
+import { detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
 import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
+import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
+import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
@@ -21,10 +26,29 @@ class LoggerFactory {
 
         winston.addColors(logLevels.colours);
 
+        if (config.otelLogEnabled) {
+            const loggerProvider = new LoggerProvider({
+            // Service.name, service.version correlated with logs
+                resource: detectResources({
+                    detectors: [envDetector, processDetector, hostDetector]
+                })
+            });
+
+            loggerProvider.addLogRecordProcessor(
+                new BatchLogRecordProcessor(new OTLPLogExporter())
+            );
+            api.logs.setGlobalLoggerProvider(loggerProvider);
+        }
+
+        const transports = [
+            new winston.transports.Console(this.createTransportOptions(options.namespace)),
+            ...config.otelLogEnabled ? [new OpenTelemetryTransportV3()] : []
+        ];
+
         return winston.createLogger({
             level: config.level,
             levels: logLevels.levels,
-            transports: [new winston.transports.Console(this.createTransportOptions(options.namespace))],
+            transports: transports,
             exitOnError: false
         }) as StructuredLogger;
     }
