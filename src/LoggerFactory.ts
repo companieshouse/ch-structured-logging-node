@@ -25,6 +25,8 @@ class LoggerFactory {
 
     public static create(options: LoggerOptions) {
 
+        console.log("WOOT! Inside LoggerFactory create ...");
+
         winston.addColors(logLevels.colours);
 
         const loggerProvider = new LoggerProvider({
@@ -37,6 +39,7 @@ class LoggerFactory {
         loggerProvider.addLogRecordProcessor(
             new BatchLogRecordProcessor(new OTLPLogExporter())
         );
+        console.log("WOOT! Adding BaggageLogRecordProcessor ...");
         loggerProvider.addLogRecordProcessor(new BaggageLogRecordProcessor());
 
         api.logs.setGlobalLoggerProvider(loggerProvider);
