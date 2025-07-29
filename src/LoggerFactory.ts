@@ -10,6 +10,7 @@ import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
+import BaggageLogRecordProcessor from "./BaggageLogProcessor";
 
 class LoggerFactory {
 
@@ -26,17 +27,19 @@ class LoggerFactory {
 
         winston.addColors(logLevels.colours);
 
-            const loggerProvider = new LoggerProvider({
+        const loggerProvider = new LoggerProvider({
             // Service.name, service.version correlated with logs
-                resource: detectResources({
-                    detectors: [envDetector, processDetector, hostDetector]
-                })
-            });
+            resource: detectResources({
+                detectors: [envDetector, processDetector, hostDetector]
+            })
+        });
 
-            loggerProvider.addLogRecordProcessor(
-                new BatchLogRecordProcessor(new OTLPLogExporter())
-            );
-            api.logs.setGlobalLoggerProvider(loggerProvider);
+        loggerProvider.addLogRecordProcessor(
+            new BatchLogRecordProcessor(new OTLPLogExporter())
+        );
+        loggerProvider.addLogRecordProcessor(new BaggageLogRecordProcessor());
+
+        api.logs.setGlobalLoggerProvider(loggerProvider);
 
         const transports = [
             new winston.transports.Console(this.createTransportOptions(options.namespace)),
