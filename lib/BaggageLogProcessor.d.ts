@@ -1,5 +1,5 @@
-declare const LogRecordProcessor: any;
-declare class BaggageLogRecordProcessor extends LogRecordProcessor {
+import { LogRecordProcessor } from '@opentelemetry/sdk-logs';
+declare class BaggageLogRecordProcessor implements LogRecordProcessor {
     onEmit(logRecord: any): void;
     shutdown(): Promise<void>;
     forceFlush(): Promise<void>;

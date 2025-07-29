@@ -1,9 +1,8 @@
-const {propagation } = require('@opentelemetry/api');
-import { context } from '@opentelemetry/api';
+import { context, propagation } from '@opentelemetry/api';
 
-const { LogRecordProcessor } = require('@opentelemetry/sdk-logs');
+import { LogRecordProcessor } from '@opentelemetry/sdk-logs';
 
-class BaggageLogRecordProcessor extends LogRecordProcessor {  
+class BaggageLogRecordProcessor implements LogRecordProcessor {  
   onEmit(logRecord: any) {
     console.log("WOOOT !!!! Inside Log record processor");
     
