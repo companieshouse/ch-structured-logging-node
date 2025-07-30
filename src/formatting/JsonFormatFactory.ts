@@ -8,7 +8,7 @@ class JsonFormatFactory {
 
         return winston.format.printf(function (info) {
 
-            const span = trace.getSpan(trace.context.active());
+            const span = trace.getSpan(trace.context?.active());
 
             console.log("Span is : ", span);
 
