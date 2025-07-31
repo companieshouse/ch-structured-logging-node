@@ -28,7 +28,7 @@ class JsonFormatFactory {
                 }
             };
 
-            console.log("Json message : ", JSON.stringify(message));
+            console.log("Json message : ", message);
 
             return JSON.stringify(message);
         });
