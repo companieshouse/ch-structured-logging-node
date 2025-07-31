@@ -15,7 +15,7 @@ class JsonFormatFactory {
                 context: info.context,
                 ...(info.trace_id && { trace_id: info.trace_id }),
                 ...(info.span_id && { span_id: info.span_id }),
-                ...(info.trace_flags && { flags: info.trace_flags }),
+                ...(info.trace_flags && { flags: +info.trace_flags }),
                 data: {
                     message: info.message,
                     path: info.path,
@@ -24,11 +24,11 @@ class JsonFormatFactory {
                     duration: info.duration,
                     ...(info.trace_id && { trace_id: info.trace_id }),
                     ...(info.span_id && { span_id: info.span_id }),
-                    ...(info.trace_flags && { flags: info.trace_flags })
+                    ...(info.trace_flags && { flags: +info.trace_flags })
                 }
             };
 
-            console.log("Message: ",JSON.stringify(message));
+            console.log("Json message : ", JSON.stringify(message));
 
             return JSON.stringify(message);
         });
