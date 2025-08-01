@@ -6,7 +6,6 @@ class JsonFormatFactory {
     public static create(namespace: string) {
 
         return winston.format.printf(function (info) {
-            console.log("Info: ", info);
 
             const message = {
                 created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
@@ -15,7 +14,7 @@ class JsonFormatFactory {
                 context: info.context,
                 ...(info.trace_id && { trace_id: info.trace_id }),
                 ...(info.span_id && { span_id: info.span_id }),
-                ...(info.trace_flags && { flags: +info.trace_flags }),
+                ...(info.trace_flags && { flags: info.trace_flags }),
                 data: {
                     message: info.message,
                     path: info.path,
@@ -24,11 +23,9 @@ class JsonFormatFactory {
                     duration: info.duration,
                     ...(info.trace_id && { trace_id: info.trace_id }),
                     ...(info.span_id && { span_id: info.span_id }),
-                    ...(info.trace_flags && { flags: +info.trace_flags })
+                    ...(info.trace_flags && { flags: info.trace_flags })
                 }
             };
-
-            console.log("Json message : ", message);
 
             return JSON.stringify(message);
         });
