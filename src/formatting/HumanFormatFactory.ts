@@ -5,8 +5,6 @@ import winston from "winston";
 class HumanFormatFactory {
 
     public static create(namespace: string) {
-        console.log("Activating HumanFormatFactory ...");
-        
 
         const colorizer = winston.format.colorize();
 

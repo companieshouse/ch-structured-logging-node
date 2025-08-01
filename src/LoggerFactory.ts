@@ -10,13 +10,10 @@ import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
-// import { WinstonInstrumentation } from '@opentelemetry/instrumentation-winston';
 
 class LoggerFactory {
 
     private static createTransportOptions(namespace: string) {
-        console.log("config.humanReadable", config.humanReadable);
-
         return {
             handleExceptions: true,
             format: config.humanReadable ?
@@ -35,10 +32,6 @@ class LoggerFactory {
                 detectors: [envDetector, processDetector, hostDetector]
             })
         });
-
-        // new WinstonInstrumentation({
-        //     disableLogSending: true
-        // })
 
         loggerProvider.addLogRecordProcessor(
             new BatchLogRecordProcessor(new OTLPLogExporter())
