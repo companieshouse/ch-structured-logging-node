@@ -5,6 +5,7 @@ import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
+import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
@@ -46,7 +47,8 @@ class LoggerFactory {
         api.logs.setGlobalLoggerProvider(loggerProvider);
 
         const transports = [
-            new winston.transports.Console(this.createTransportOptions(options.namespace))
+            new winston.transports.Console(this.createTransportOptions(options.namespace)),
+            new OpenTelemetryTransportV3()
         ];
 
         return winston.createLogger({
