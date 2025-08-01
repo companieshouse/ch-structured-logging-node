@@ -10,7 +10,7 @@ import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
-import { WinstonInstrumentation } from '@opentelemetry/instrumentation-winston';
+// import { WinstonInstrumentation } from '@opentelemetry/instrumentation-winston';
 
 class LoggerFactory {
 
@@ -36,9 +36,9 @@ class LoggerFactory {
             })
         });
 
-        new WinstonInstrumentation({
-            disableLogSending: true
-        })
+        // new WinstonInstrumentation({
+        //     disableLogSending: true
+        // })
 
         loggerProvider.addLogRecordProcessor(
             new BatchLogRecordProcessor(new OTLPLogExporter())
