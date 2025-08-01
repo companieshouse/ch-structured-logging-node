@@ -15,6 +15,8 @@ import BaggageLogRecordProcessor from "./BaggageLogProcessor";
 class LoggerFactory {
 
     private static createTransportOptions(namespace: string) {
+        console.log("config.humanReadable", config.humanReadable);
+        
         return {
             handleExceptions: true,
             format: config.humanReadable ?

@@ -4,6 +4,8 @@ import winston from "winston";
 class JsonFormatFactory {
 
     public static create(namespace: string) {
+        console.log("Activating JsonFormatFactory ...");
+
 
         return winston.format.printf(function (info) {
 
@@ -13,7 +15,7 @@ class JsonFormatFactory {
                 namespace: namespace,
                 context: info.context,
                 ...(info.trace_id && { trace_id: info.trace_id }),
-                ...(info.span_id && { span_id: info.span_id }),
+                ...(info.span_id && { message_span_id: info.span_id }),
                 ...(info.trace_flags && { flags: info.trace_flags }),
                 data: {
                     message: info.message,
@@ -22,7 +24,7 @@ class JsonFormatFactory {
                     status: info.status,
                     duration: info.duration,
                     ...(info.trace_id && { trace_id: info.trace_id }),
-                    ...(info.span_id && { span_id: info.span_id }),
+                    ...(info.span_id && { data_span_id: info.span_id }),
                     ...(info.trace_flags && { flags: info.trace_flags })
                 }
             };
