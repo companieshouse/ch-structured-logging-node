@@ -5,18 +5,18 @@ import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
-import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
 import BaggageLogRecordProcessor from "./BaggageLogProcessor";
+import { WinstonInstrumentation } from '@opentelemetry/instrumentation-winston';
 
 class LoggerFactory {
 
     private static createTransportOptions(namespace: string) {
         console.log("config.humanReadable", config.humanReadable);
-        
+
         return {
             handleExceptions: true,
             format: config.humanReadable ?
@@ -36,6 +36,10 @@ class LoggerFactory {
             })
         });
 
+        new WinstonInstrumentation({
+            disableLogSending: true
+        })
+
         loggerProvider.addLogRecordProcessor(
             new BatchLogRecordProcessor(new OTLPLogExporter())
         );
@@ -44,8 +48,7 @@ class LoggerFactory {
         api.logs.setGlobalLoggerProvider(loggerProvider);
 
         const transports = [
-            new winston.transports.Console(this.createTransportOptions(options.namespace)),
-            new OpenTelemetryTransportV3()
+            new winston.transports.Console(this.createTransportOptions(options.namespace))
         ];
 
         return winston.createLogger({
