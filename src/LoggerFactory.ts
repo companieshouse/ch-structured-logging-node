@@ -9,7 +9,6 @@ import StructuredLogger from "./StructuredLogger";
 import config from "./config";
 import logLevels from "./levelConfig";
 import winston from "winston";
-import BaggageLogRecordProcessor from "./BaggageLogProcessor";
 import { WinstonInstrumentation } from '@opentelemetry/instrumentation-winston';
 
 class LoggerFactory {
@@ -43,7 +42,6 @@ class LoggerFactory {
         loggerProvider.addLogRecordProcessor(
             new BatchLogRecordProcessor(new OTLPLogExporter())
         );
-        loggerProvider.addLogRecordProcessor(new BaggageLogRecordProcessor());
 
         api.logs.setGlobalLoggerProvider(loggerProvider);
 
