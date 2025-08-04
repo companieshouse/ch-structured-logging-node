@@ -178,7 +178,7 @@ describe("#HumanFormatFactory", function () {
 
         const logString = formatter.template(testInfo);
 
-        ['trace_id', 'span_id', 'flags'].forEach(label => {
+        ["trace_id", "span_id", "flags"].forEach(label => {
             expect(logString).to.not.contain(label);
         });
     });
