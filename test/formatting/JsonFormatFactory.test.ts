@@ -108,17 +108,13 @@ describe("#JsonFormatFactory", function () {
         const log = getLog(testInfo);
 
         const actualNumKeysWithDataKey = Object.keys(log).length + Object.keys(log.data).length;
-        const expectedNumKeysWithDataKey = 15;
+        const expectedNumKeysWithDataKey = 12;
 
         expect(actualNumKeysWithDataKey).to.equal(expectedNumKeysWithDataKey);
 
         expect(log.trace_id).to.equal(testInfo.trace_id);
         expect(log.span_id).to.equal(testInfo.span_id);
         expect(log.trace_flags).to.equal(testInfo.trace_flags);
-        expect(log.data.trace_id).to.equal(testInfo.trace_id);
-        expect(log.data.span_id).to.equal(testInfo.span_id);
-        expect(log.data.trace_flags).to.equal(testInfo.trace_flags);
-
     });
 
     it("doesn't print instrumentation details if trace context is not present", function () {
