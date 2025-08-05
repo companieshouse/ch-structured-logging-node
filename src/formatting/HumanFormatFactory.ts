@@ -10,6 +10,7 @@ class HumanFormatFactory {
 
         return winston.format.printf(function (info) {
 
+            /* eslint camelcase: ["error", {allow: ["trace_id", "span_id", "trace_flags"]}] */
             const messageInfo: LogMetaData = {
                 created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 namespace: namespace,
@@ -18,7 +19,10 @@ class HumanFormatFactory {
                 path: info.path,
                 method: info.method,
                 status: info.status,
-                duration: info.duration
+                duration: info.duration,
+                trace_id: info.trace_id,
+                span_id: info.span_id,
+                trace_flags: info.trace_flags
             };
 
             const keys = Object.keys(messageInfo).sort();
