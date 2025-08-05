@@ -114,10 +114,10 @@ describe("#JsonFormatFactory", function () {
 
         expect(log.trace_id).to.equal(testInfo.trace_id);
         expect(log.span_id).to.equal(testInfo.span_id);
-        expect(log.flags).to.equal(Number(testInfo.trace_flags));
+        expect(log.trace_flags).to.equal(testInfo.trace_flags);
         expect(log.data.trace_id).to.equal(testInfo.trace_id);
         expect(log.data.span_id).to.equal(testInfo.span_id);
-        expect(log.data.flags).to.equal(Number(testInfo.trace_flags));
+        expect(log.data.trace_flags).to.equal(testInfo.trace_flags);
 
     });
 
@@ -133,7 +133,7 @@ describe("#JsonFormatFactory", function () {
 
         const log = getLog(testInfo);
 
-        ["trace_id", "span_id", "flags"].forEach(key => {
+        ["trace_id", "span_id", "trace_flags"].forEach(key => {
             expect(log[key]).to.be.undefined;
             expect(log.data[key]).to.be.undefined;
         });

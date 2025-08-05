@@ -163,7 +163,7 @@ describe("#HumanFormatFactory", function () {
 
         expect(logString).to.contain(`trace_id: ${testInfo.trace_id}`);
         expect(logString).to.contain(`span_id: ${testInfo.span_id}`);
-        expect(logString).to.contain(`flags: ${Number(testInfo.trace_flags)}`);
+        expect(logString).to.contain(`trace_flags: ${testInfo.trace_flags}`);
     });
 
     it("doesn't print instrumentation details if trace context is not present", function () {
@@ -178,7 +178,7 @@ describe("#HumanFormatFactory", function () {
 
         const logString = formatter.template(testInfo);
 
-        ["trace_id", "span_id", "flags"].forEach(label => {
+        ["trace_id", "span_id", "trace_flags"].forEach(label => {
             expect(logString).to.not.contain(label);
         });
     });

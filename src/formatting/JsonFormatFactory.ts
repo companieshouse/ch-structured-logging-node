@@ -15,7 +15,7 @@ class JsonFormatFactory {
                 context: info.context,
                 trace_id: info.trace_id,
                 span_id: info.span_id,
-                ...info.trace_flags && { flags: Number(info.trace_flags) },
+                trace_flags: info.trace_flags,
                 data: {
                     message: info.message,
                     path: info.path,
@@ -24,7 +24,7 @@ class JsonFormatFactory {
                     duration: info.duration,
                     trace_id: info.trace_id,
                     span_id: info.span_id,
-                    ...info.trace_flags && { flags: Number(info.trace_flags) }
+                    trace_flags: info.trace_flags
                 }
             };
 
