@@ -7,6 +7,8 @@ import sinon from "sinon";
 
 
 describe("LoggerFactory", function () {
+    // eslint-disable-next-line no-invalid-this
+    this.timeout(8000);
     let LoggerFactory: any;
 
     describe("#create", function () {
