@@ -25,7 +25,7 @@ class HumanFormatFactory {
                 trace_flags: info.trace_flags
             };
 
-            const keys = Object.keys(messageInfo).sort();
+            const keys = Object.keys(messageInfo).sort((a, b) => a.localeCompare(b));
 
             let message = colorizer.colorize(info.level, `${messageInfo.created} ${messageInfo.event}: ${info.message}`);
 
