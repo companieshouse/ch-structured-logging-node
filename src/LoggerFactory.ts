@@ -1,6 +1,6 @@
 import * as api from "@opentelemetry/api-logs";
 import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
-import { detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
+import {  detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
 import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
@@ -12,43 +12,42 @@ import logLevels from "./levelConfig";
 import winston from "winston";
 
 class LoggerFactory {
-
     private static createTransportOptions(namespace: string) {
         return {
             handleExceptions: true,
-            format: config.humanReadable ?
-                HumanFormatFactory.create(namespace) :
-                JsonFormatFactory.create(namespace)
+            format: config.humanReadable
+                ? HumanFormatFactory.create(namespace)
+                : JsonFormatFactory.create(namespace),
         };
     }
 
-    public static create(options: LoggerOptions) {
-
+    public static  create(options: LoggerOptions) {
         winston.addColors(logLevels.colours);
 
-        const loggerProvider = new LoggerProvider({
-            // Service.name, service.version correlated with logs
-            resource: detectResources({
-                detectors: [envDetector, processDetector, hostDetector]
-            })
-        });
+        if (config.otelLogEnabled) {
+            // Await resource detection
+            const resource = detectResources({
+                detectors: [envDetector, processDetector, hostDetector],
+            });
 
-        loggerProvider.addLogRecordProcessor(
-            new BatchLogRecordProcessor(new OTLPLogExporter())
-        );
+            const loggerProvider = new LoggerProvider({
+                resource,
+                processors: [new BatchLogRecordProcessor(new OTLPLogExporter())],
+            });
 
-        api.logs.setGlobalLoggerProvider(loggerProvider);
+            api.logs.setGlobalLoggerProvider(loggerProvider);
+        }
 
         const transports = [
             new winston.transports.Console(this.createTransportOptions(options.namespace)),
-            new OpenTelemetryTransportV3()
+            ...(config.otelLogEnabled ? [new OpenTelemetryTransportV3()] : []),
         ];
 
         return winston.createLogger({
             level: config.level,
             levels: logLevels.levels,
-            transports: transports,
-            exitOnError: false
+            transports,
+            exitOnError: false,
         }) as StructuredLogger;
     }
 }
