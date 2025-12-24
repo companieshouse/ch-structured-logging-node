@@ -15,17 +15,17 @@ class HumanFormatFactory {
                 created: moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                 namespace: namespace,
                 event: info.level,
-                context: info.context,
-                path: info.path,
-                method: info.method,
-                status: info.status,
-                duration: info.duration,
+                context: info.context as string,
+                path: info.path as string,
+                method: info.method as string,
+                status: info.status as number,
+                duration: info.duration as number,
                 trace_id: info.trace_id,
                 span_id: info.span_id,
                 trace_flags: info.trace_flags
             };
 
-            const keys = Object.keys(messageInfo).sort((currentKey, nextKey) => currentKey.localeCompare(nextKey));
+            const keys = Object.keys(messageInfo).sort();
 
             let message = colorizer.colorize(info.level, `${messageInfo.created} ${messageInfo.event}: ${info.message}`);
 
