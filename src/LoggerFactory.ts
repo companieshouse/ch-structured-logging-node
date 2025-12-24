@@ -1,6 +1,6 @@
 import * as api from "@opentelemetry/api-logs";
 import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
-import {  detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
+import { detectResources, envDetector, hostDetector, processDetector } from "@opentelemetry/resources";
 import HumanFormatFactory from "./formatting/HumanFormatFactory";
 import JsonFormatFactory from "./formatting/JsonFormatFactory";
 import LoggerOptions from "./LoggerOptions";
@@ -17,22 +17,22 @@ class LoggerFactory {
             handleExceptions: true,
             format: config.humanReadable
                 ? HumanFormatFactory.create(namespace)
-                : JsonFormatFactory.create(namespace),
+                : JsonFormatFactory.create(namespace)
         };
     }
 
-    public static  create(options: LoggerOptions) {
+    public static create(options: LoggerOptions) {
         winston.addColors(logLevels.colours);
 
         if (config.otelLogEnabled) {
 
             const resource = detectResources({
-                detectors: [envDetector, processDetector, hostDetector],
+                detectors: [envDetector, processDetector, hostDetector]
             });
 
             const loggerProvider = new LoggerProvider({
                 resource,
-                processors: [new BatchLogRecordProcessor(new OTLPLogExporter())],
+                processors: [new BatchLogRecordProcessor(new OTLPLogExporter())]
             });
 
             api.logs.setGlobalLoggerProvider(loggerProvider);
@@ -40,14 +40,14 @@ class LoggerFactory {
 
         const transports = [
             new winston.transports.Console(this.createTransportOptions(options.namespace)),
-            ...(config.otelLogEnabled ? [new OpenTelemetryTransportV3()] : []),
+            ...config.otelLogEnabled ? [new OpenTelemetryTransportV3()] : []
         ];
 
         return winston.createLogger({
             level: config.level,
             levels: logLevels.levels,
             transports,
-            exitOnError: false,
+            exitOnError: false
         }) as StructuredLogger;
     }
 }
