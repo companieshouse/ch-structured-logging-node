@@ -90,4 +90,48 @@ describe("#JsonFormatFactory", function () {
         expect(log.created).to.exist;
         expect(log.namespace).to.exist;
     });
+
+    it("prints instrumentation details if trace context is present", function () {
+        /* eslint camelcase: ["error", {allow: ["trace_id", "span_id", "trace_flags"]}] */
+        const testInfo = {
+            level: "info",
+            message: "This is a instrumentation test",
+            path: "/some/path",
+            method: "GET",
+            status: 200,
+            duration: 43,
+            trace_id: "e11e4f6364807e40c333cc8d3d5b9935",
+            span_id: "2bb2b212f57cd105",
+            trace_flags: "01"
+        };
+
+        const log = getLog(testInfo);
+
+        const actualNumKeysWithDataKey = Object.keys(log).length + Object.keys(log.data).length;
+        const expectedNumKeysWithDataKey = 12;
+
+        expect(actualNumKeysWithDataKey).to.equal(expectedNumKeysWithDataKey);
+
+        expect(log.trace_id).to.equal(testInfo.trace_id);
+        expect(log.span_id).to.equal(testInfo.span_id);
+        expect(log.trace_flags).to.equal(testInfo.trace_flags);
+    });
+
+    it("doesn't print instrumentation details if trace context is not present", function () {
+        const testInfo = {
+            level: "info",
+            message: "This is a instrumentation test",
+            path: "/some/path",
+            method: "GET",
+            status: 200,
+            duration: 43
+        };
+
+        const log = getLog(testInfo);
+
+        ["trace_id", "span_id", "trace_flags"].forEach(key => {
+            expect(log[key]).to.be.undefined;
+            expect(log.data[key]).to.be.undefined;
+        });
+    });
 });

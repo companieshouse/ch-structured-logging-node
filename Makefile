@@ -18,8 +18,8 @@ test:
 sonar: test
 	npm run sonarqube
 
-.PHONY: security-check
-security-check:
+.PHONY: dependency-check
+dependency-check:
 	npm audit
 
 .PHONY: test-unit

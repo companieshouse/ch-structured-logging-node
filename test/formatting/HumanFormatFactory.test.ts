@@ -144,4 +144,42 @@ describe("#HumanFormatFactory", function () {
         expect(logString).to.contain("created: ");
         expect(actualNumberOfLines).to.equal(expectedNumberOfLines);
     });
+
+    it("prints instrumentation details if trace context is present", function () {
+        /* eslint camelcase: ["error", {allow: ["trace_id", "span_id", "trace_flags"]}] */
+        const testInfo = {
+            level: "info",
+            message: "This is a instrumentation test",
+            path: "/some/path",
+            method: "GET",
+            status: 200,
+            duration: 43,
+            trace_id: "e11e4f6364807e40c333cc8d3d5b9935",
+            span_id: "2bb2b212f57cd105",
+            trace_flags: "01"
+        };
+
+        const logString = formatter.template(testInfo);
+
+        expect(logString).to.contain(`trace_id: ${testInfo.trace_id}`);
+        expect(logString).to.contain(`span_id: ${testInfo.span_id}`);
+        expect(logString).to.contain(`trace_flags: ${testInfo.trace_flags}`);
+    });
+
+    it("doesn't print instrumentation details if trace context is not present", function () {
+        const testInfo = {
+            level: "info",
+            message: "This is a instrumentation test",
+            path: "/some/path",
+            method: "GET",
+            status: 200,
+            duration: 43
+        };
+
+        const logString = formatter.template(testInfo);
+
+        ["trace_id", "span_id", "trace_flags"].forEach(label => {
+            expect(logString).to.not.contain(label);
+        });
+    });
 });
