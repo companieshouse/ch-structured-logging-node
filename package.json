@@ -44,7 +44,7 @@
     "chai": "~4.2.0",
     "eslint": "^8.52.0",
     "eslint-plugin-chai-friendly": "^1.1.0",
-    "mocha": "^11.7.2",
+    "mocha": "^11.3.0",
     "mockdate": "~3.0.2",
     "nyc": "^17.1.0",
     "sinon": "^21.0.0",
@@ -54,5 +54,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "overrides": {
+    "glob": "^10.5.0"
+  }
 }
