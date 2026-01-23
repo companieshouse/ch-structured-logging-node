@@ -12,29 +12,31 @@ import logLevels from "./levelConfig";
 import winston from "winston";
 
 class LoggerFactory {
+
     private static createTransportOptions(namespace: string) {
         return {
             handleExceptions: true,
-            format: config.humanReadable
-                ? HumanFormatFactory.create(namespace)
-                : JsonFormatFactory.create(namespace)
+            format: config.humanReadable ?
+                HumanFormatFactory.create(namespace) :
+                JsonFormatFactory.create(namespace)
         };
     }
 
     public static create(options: LoggerOptions) {
+
         winston.addColors(logLevels.colours);
 
         if (config.otelLogEnabled) {
-
-            const resource = detectResources({
-                detectors: [envDetector, processDetector, hostDetector]
-            });
-
             const loggerProvider = new LoggerProvider({
-                resource,
-                processors: [new BatchLogRecordProcessor(new OTLPLogExporter())]
+            // Service.name, service.version correlated with logs
+                resource: detectResources({
+                    detectors: [envDetector, processDetector, hostDetector]
+                })
             });
 
+            loggerProvider.addLogRecordProcessor(
+                new BatchLogRecordProcessor(new OTLPLogExporter())
+            );
             api.logs.setGlobalLoggerProvider(loggerProvider);
         }
 
@@ -46,7 +48,7 @@ class LoggerFactory {
         return winston.createLogger({
             level: config.level,
             levels: logLevels.levels,
-            transports,
+            transports: transports,
             exitOnError: false
         }) as StructuredLogger;
     }

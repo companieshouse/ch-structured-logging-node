@@ -1,3 +1,4 @@
+/// <reference types="qs" />
 import { RequestHandler } from "express";
 import StructuredLogger from "./StructuredLogger";
 declare class MiddlewareFactory {
