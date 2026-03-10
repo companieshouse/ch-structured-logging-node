@@ -14,10 +14,6 @@ build:	package-install lint
 test: 
 	npm run test:coverage
 
-.PHONY: sonar
-sonar: test
-	npm run sonarqube
-
 .PHONY: dependency-check
 dependency-check:
 	npm audit
