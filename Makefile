@@ -1,3 +1,8 @@
+.PHONY: clean
+clean:
+	rm -rf ./coverage
+	rm -rf ./dist
+
 .PHONY: package-install
 package-install:
 	npm install
@@ -11,13 +16,13 @@ build:	package-install lint
 	npm run build
 
 .PHONY: test
-test: 
-	npm run test:coverage
+test: test-unit
 
 .PHONY: dependency-check
 dependency-check:
 	npm audit
 
 .PHONY: test-unit
-test-unit:
-	npm run test
+test-unit: clean
+	npm run test:coverage
+
