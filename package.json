@@ -22,15 +22,15 @@
   "license": "MIT",
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
-    "@opentelemetry/core": "^2.7.1",
-    "@opentelemetry/exporter-logs-otlp-http": "^0.218.0",
-    "@opentelemetry/resources": "^2.7.1",
-    "@opentelemetry/sdk-logs": "^0.218.0",
-    "@opentelemetry/sdk-node": "^0.218.0",
-    "@opentelemetry/winston-transport": "^0.28.0",
+    "@opentelemetry/core": "^2.8.0",
+    "@opentelemetry/exporter-logs-otlp-http": "^0.219.0",
+    "@opentelemetry/resources": "^2.8.0",
+    "@opentelemetry/sdk-logs": "^0.219.0",
+    "@opentelemetry/sdk-node": "^0.219.0",
+    "@opentelemetry/winston-transport": "^0.29.0",
     "moment": "^2.29.4",
     "on-finished": "~2.3.0",
-    "winston": "3.18.3"
+    "winston": "3.19"
   },
   "devDependencies": {
     "@types/chai": "~4.2.22",
@@ -40,13 +40,13 @@
     "@types/sinon": "^21.0.1",
     "@typescript-eslint/eslint-plugin": "^8.50.1",
     "@typescript-eslint/parser": "^8.50.1",
-    "chai": "~4.2.0",
+    "chai": "^6.2.2",
     "eslint": "^8.52.0",
     "eslint-plugin-chai-friendly": "^1.1.0",
-    "mocha": "^11.7.5",
+    "mocha": "^11.7.6",
     "mockdate": "~3.0.2",
-    "nyc": "^17.1.0",
-    "sinon": "^21.0.0",
+    "nyc": "^18.0.0",
+    "sinon": "^22.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },
@@ -55,6 +55,7 @@
   ],
   "overrides": {
     "serialize-javascript": "^7.0.3",
-    "diff": "^8.0.2"
+    "diff": "^8.0.2",
+    "js-yaml": "^4.2.0"
   }
 }
