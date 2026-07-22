@@ -1,4 +1,4 @@
-import JsonFormatFactory from "../../lib/formatting/JsonFormatFactory";
+import JsonFormatFactory from "../../src/formatting/JsonFormatFactory";
 import chai from "chai";
 const expect = chai.expect;
 
