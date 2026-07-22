@@ -23,10 +23,10 @@
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
     "@opentelemetry/core": "^2.8.0",
-    "@opentelemetry/exporter-logs-otlp-http": "^0.219.0",
+    "@opentelemetry/exporter-logs-otlp-http": "^0.221.0",
     "@opentelemetry/resources": "^2.8.0",
-    "@opentelemetry/sdk-logs": "^0.219.0",
-    "@opentelemetry/sdk-node": "^0.219.0",
+    "@opentelemetry/sdk-logs": "^0.221.0",
+    "@opentelemetry/sdk-node": "^0.221.0",
     "@opentelemetry/winston-transport": "^0.29.0",
     "moment": "^2.29.4",
     "on-finished": "~2.3.0",

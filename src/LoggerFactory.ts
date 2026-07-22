@@ -32,7 +32,7 @@ class LoggerFactory {
 
             const loggerProvider = new LoggerProvider({
                 resource,
-                processors: [new BatchLogRecordProcessor(new OTLPLogExporter())]
+                processors: [new BatchLogRecordProcessor({ exporter: new OTLPLogExporter() })]
             });
 
             api.logs.setGlobalLoggerProvider(loggerProvider);
